@@ -8,7 +8,15 @@ interface Props {
   featured?: boolean;
 }
 
+import { Image } from 'astro:assets';
 const { title, url, description, stack, image, featured = false } = Astro.props;
+
+// Dynamically import all images from assets
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/projects/*.{jpeg,jpg,png,gif}');
+const imagePath = image ? `/src/assets${image}` : '';
+if (image && !images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/images/projects/*.{jpeg,jpg,png,gif}"`);
+
+const imageObj = image ? (await images[imagePath]()).default : null;
 
 // Logic to pick a "primary" tech color for the placeholder background
 const techColors: Record<string, string> = {
@@ -26,6 +34,7 @@ const primaryTech = stack[0] || 'Astro';
 const baseColor = techColors[primaryTech] || '#00d4aa';
 ---
 
+
 <a href={url} target="_blank" rel="noopener noreferrer" class="glass-card flex flex-col group overflow-hidden h-full transition-all duration-500 hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,212,170,0.15)] relative">
   <!-- Subtle Gradient Glow -->
   <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/5 rounded-full blur-[80px] group-hover:bg-accent/10 transition-colors duration-500"></div>
@@ -35,14 +44,20 @@ const baseColor = techColors[primaryTech] || '#00d4aa';
     class="h-[220px] w-full relative flex items-center justify-center overflow-hidden"
     style={!image ? `background: linear-gradient(135deg, ${baseColor}33 0%, ${baseColor}66 100%)` : ''}
   >
-    {image ? (
-      <img 
-        src={image} 
+    {image && imageObj ? (
+      <Image 
+        src={imageObj} 
         alt={title} 
+        width={400}
+        height={220}
+        format="webp"
+        quality={80}
         class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        loading="lazy"
+        loading={featured ? "eager" : "lazy"}
       />
     ) : (
+
+
       <>
         <!-- Decorative Grid/Pattern -->
         <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>

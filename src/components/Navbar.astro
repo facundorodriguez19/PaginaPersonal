@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/ui/logo.png';
+
 const { pathname } = Astro.url;
 
 const navLinks = [
@@ -14,13 +17,14 @@ const isActive = (href) => {
   if (href !== '/' && pathname.startsWith(href)) return true;
   return false;
 };
+
 ---
 
 <nav id="navbar" class="fixed top-0 left-0 w-full h-[80px] z-[100] transition-all duration-500 flex items-center px-6">
     <div id="navbar-container" class="max-w-[1200px] w-full mx-auto p-4 flex justify-between items-center transition-all duration-500 border border-transparent rounded-[20px] md:px-6">
       <!-- Logo -->
       <a href="/" class="flex items-center group transition-transform origin-left">
-        <img src="/logo.png" alt="FACUNDO" class="h-[24px] md:h-[45px] w-auto object-contain brightness-110 mix-blend-screen" />
+        <Image src={logo} alt="FACUNDO" width={120} height={45} format="webp" loading="eager" class="h-[24px] md:h-[45px] w-auto object-contain brightness-110 mix-blend-screen" />
       </a>
 
     <!-- Rest of Navbar Items -->

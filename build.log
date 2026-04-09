@@ -1,0 +1,43 @@
+﻿
+> pagina-personal@0.0.1 build
+> astro build
+
+11:28:54 [types] Generated 53ms
+11:28:54 [build] output: "static"
+11:28:54 [build] directory: C:\Users\Facundo\Desktop\Pagina Personal\dist\
+11:28:54 [build] Collecting build info...
+11:28:54 [build] Ô£ô Completed in 106ms.
+11:28:54 [build] Building static entrypoints...
+11:28:56 [vite] [32mÔ£ô built in 1.15s[39m
+11:28:56 [build] Ô£ô Completed in 1.18s.
+
+ building client (vite) 
+11:28:56 [vite] transforming...
+11:28:56 [vite] [32mÔ£ô[39m 9 modules transformed.
+11:28:56 [vite] rendering chunks...
+11:28:56 [vite] computing gzip size...
+11:28:56 [vite] [2mdist/[22m[36m_astro/hoisted.CMwbwBIy.js  [39m[1m[2m0.20 kB[22m[1m[22m[2m Ôöé gzip: 0.17 kB[22m
+11:28:56 [vite] [2mdist/[22m[36m_astro/hoisted.5HK7xTkb.js  [39m[1m[2m0.74 kB[22m[1m[22m[2m Ôöé gzip: 0.37 kB[22m
+11:28:56 [vite] [2mdist/[22m[36m_astro/hoisted.TlUUSYtH.js  [39m[1m[2m0.79 kB[22m[1m[22m[2m Ôöé gzip: 0.43 kB[22m
+11:28:56 [vite] [2mdist/[22m[36m_astro/hoisted.CK8eoRBC.js  [39m[1m[2m1.48 kB[22m[1m[22m[2m Ôöé gzip: 0.53 kB[22m
+11:28:56 [vite] [32mÔ£ô built in 27ms[39m
+
+ generating static routes 
+11:28:56 ÔûÂ src/pages/404.astro
+node.exe : Image is not defined
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Image is not defined:String 
+   ) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Stack trace:
+    at file:///C:/Users/Facundo/Desktop/Pagina%20Personal/dist/chunks/Bas
+eLayout_DVSOec8H.mjs:27:547
+    at AstroComponentInstance.init (file:///C:/Users/Facundo/Desktop/Pagi
+na%20Personal/dist/chunks/astro/server_BgjfIjaw.mjs:1060:29)
+    at Object.render (file:///C:/Users/Facundo/Desktop/Pagina%20Personal/
+dist/chunks/astro/server_BgjfIjaw.mjs:1564:22)
+11:28:56   ÔööÔöÇ /404.html

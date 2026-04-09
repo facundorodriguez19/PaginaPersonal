@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  excerpt: string;
+  category: string;
+  categoryColor: string;
+  date: string;
+  readTime: string;
+  coverGradient: string;
+  slug: string;
+}
+
+const { title, excerpt, category, categoryColor, date, readTime, coverGradient, slug } = Astro.props;
+---
+
+<a href={`/blog/${slug}`} class="glass-card flex flex-col group overflow-hidden border transition-all duration-300 hover:border-border-hover hover:-translate-y-1">
+  <!-- Cover Gradient Area -->
+  <div 
+    class="h-[180px] w-full relative"
+    style={{ background: coverGradient }}
+  >
+    <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
+    
+    <span 
+      class="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-badge border"
+      style={{ backgroundColor: `${categoryColor}22`, borderColor: `${categoryColor}44`, color: categoryColor }}
+    >
+      {category}
+    </span>
+  </div>
+
+  <div class="p-6 flex flex-col flex-1 gap-3">
+    <div class="flex items-center gap-2 text-text-muted text-[12px] font-body">
+      <time datetime={date}>{new Date(date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
+      <span>·</span>
+      <span>{readTime} de lectura</span>
+    </div>
+
+    <h3 class="text-[18px] font-bold font-body leading-snug group-hover:text-accent transition-colors line-clamp-2">
+      {title}
+    </h3>
+    
+    <p class="text-text-secondary text-[14px] line-clamp-3 leading-relaxed font-body">
+      {excerpt}
+    </p>
+
+    <div class="pt-4 mt-auto border-t border-border flex items-center">
+      <span class="text-accent text-[13px] font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all font-body">
+        Leer más <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </span>
+    </div>
+  </div>
+</a>

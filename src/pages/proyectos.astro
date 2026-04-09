@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { projects } from '../data/projects.js';
+
+const pageTitle = "Proyectos";
+
+const techColors: Record<string, string> = {
+  'php': '#ff6b6b',
+  'javascript': '#f7df1e',
+  'wordpress': '#21759b',
+  'astro': '#ff5d01',
+};
+
+const counts = {
+  todos: projects.length,
+  php: projects.filter(p => p.category === 'php').length,
+  javascript: projects.filter(p => p.category === 'javascript').length,
+  wordpress: projects.filter(p => p.category === 'wordpress').length,
+  astro: projects.filter(p => p.category === 'astro').length,
+};
+
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <!-- Header Section -->
+  <header class="pt-[120px] pb-12 px-6 bg-transparent">
+    <div class="max-w-[1200px] mx-auto flex flex-col items-center text-center">
+      <span class="text-accent font-body text-xs uppercase tracking-[0.2rem] mb-4 border-l-2 border-accent pl-4">/ PROYECTOS</span>
+      <h1 class="mb-6">Mis Proyectos</h1>
+      <p class="text-text-secondary text-lg max-w-[600px] font-body leading-relaxed">
+        {counts.todos} proyectos construidos. {projects.filter(p => p.client).length} para clientes reales, {projects.filter(p => !p.client).length} propios. Cada uno con un objetivo concreto.
+      </p>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="z-50 py-8 px-6 mb-12 border-b border-border/30">
+    <div class="max-w-[1200px] mx-auto flex flex-wrap justify-center gap-4">
+      <button 
+        class="filter-btn active px-6 py-2.5 rounded-full border border-border text-[13px] font-bold uppercase tracking-widest transition-all duration-300 hover:border-accent/50"
+        data-filter="all"
+      >
+        Todos ({counts.todos})
+      </button>
+      <button 
+        class="filter-btn px-6 py-2.5 rounded-full border border-border text-[13px] font-bold uppercase tracking-widest transition-all duration-300 hover:border-accent/50 text-text-secondary"
+        data-filter="php"
+      >
+        PHP ({counts.php})
+      </button>
+      <button 
+        class="filter-btn px-6 py-2.5 rounded-full border border-border text-[13px] font-bold uppercase tracking-widest transition-all duration-300 hover:border-accent/50 text-text-secondary"
+        data-filter="javascript"
+      >
+        JavaScript ({counts.javascript})
+      </button>
+      <button 
+        class="filter-btn px-6 py-2.5 rounded-full border border-border text-[13px] font-bold uppercase tracking-widest transition-all duration-300 hover:border-accent/50 text-text-secondary"
+        data-filter="wordpress"
+      >
+        WordPress ({counts.wordpress})
+      </button>
+      <button 
+        class="filter-btn px-6 py-2.5 rounded-full border border-border text-[13px] font-bold uppercase tracking-widest transition-all duration-300 hover:border-accent/50 text-text-secondary"
+        data-filter="astro"
+      >
+        Astro ({counts.astro})
+      </button>
+    </div>
+  </div>
+
+  <!-- Projects Grid -->
+  <section class="max-w-[1200px] mx-auto px-6 pb-24">
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => {
+        const baseColor = techColors[project.category] || '#00d4aa';
+        return (
+          <div 
+            class="project-card-container transition-all duration-300"
+            data-category={project.category}
+          >
+            <a href={project.url} target="_blank" rel="noopener noreferrer" class={`glass-card h-full flex flex-col group overflow-hidden border transition-all duration-300 hover:border-border-hover hover:-translate-y-[6px] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] relative
+              ${project.client ? 'border-t-2 border-t-accent' : ''}`}>
+              
+              <!-- Image Area -->
+              <div 
+                class="h-[220px] w-full relative flex items-center justify-center overflow-hidden"
+                style={!project.image ? `background: linear-gradient(135deg, ${baseColor}33 0%, ${baseColor}66 100%)` : ''}
+              >
+                {project.image ? (
+                  <img src={project.image} alt={project.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                ) : (
+                  <>
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                    <span class="font-display text-4xl text-white/20 uppercase tracking-widest group-hover:scale-110 transition-transform duration-500 group-hover:text-white/40">
+                      {project.title}
+                    </span>
+                  </>
+                )}
+
+                <div class="absolute bottom-4 left-4 text-[10px] text-white/40 font-mono tracking-tight bg-black/20 px-2 py-1 backdrop-blur-sm rounded-sm z-10">
+                  {project.url.replace('https://', '')}
+                </div>
+
+                {project.client && (
+                  <div class="absolute top-4 right-4 bg-accent/10 border border-accent text-accent text-[10px] font-bold px-2 py-1 rounded-badge uppercase tracking-widest animate-pulse z-10">
+                    Cliente Real
+                  </div>
+                )}
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 flex flex-col flex-1 gap-4">
+                <div class="flex flex-wrap gap-2">
+                  {project.stack.map((tag) => (
+                    <span class={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-badge tracking-wider font-mono border
+                    ${tag === 'PHP' ? 'bg-[#ff6b6b]/10 text-[#ff6b6b] border-[#ff6b6b]/20' : 
+                      tag === 'JavaScript' || tag === 'JS' ? 'bg-[#f7df1e]/10 text-[#f7df1e] border-[#f7df1e]/20' : 
+                      tag === 'WordPress' || tag === 'WP' ? 'bg-[#21759b]/10 text-[#21759b] border-[#21759b]/20' : 
+                      tag === 'Astro' ? 'bg-[#ff5d01]/10 text-[#ff5d01] border-[#ff5d01]/20' : 
+                      'bg-white/5 text-text-muted border-border'}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <span class="text-[11px] uppercase tracking-wider text-text-muted font-body font-medium">{project.type}</span>
+                  <h3 class="text-[20px] font-bold font-body group-hover:text-accent transition-colors leading-snug">{project.title}</h3>
+                </div>
+
+                <p class="text-text-secondary text-[14px] line-clamp-3 leading-relaxed flex-1 font-body">
+                  {project.description}
+                </p>
+
+                <div class="pt-4 mt-auto border-t border-border flex items-center justify-between">
+                  <span class="text-[12px] text-text-muted font-body italic leading-none">{project.year}</span>
+                  <span class="text-accent text-[14px] font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all font-body">
+                    Visitar sitio <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        )
+      })}
+    </div>
+  </section>
+
+  <!-- Callout Section -->
+  <section class="max-w-[1200px] mx-auto px-6 pb-24">
+    <div class="bg-card border-2 border-accent/20 rounded-card p-12 text-center flex flex-col items-center gap-6 group hover:border-accent/40 transition-colors">
+      <h2 class="font-display text-4xl uppercase tracking-widest">¿Querés que tu proyecto esté aquí?</h2>
+      <p class="text-text-secondary text-lg max-w-[500px]">Trabajemos juntos en tu próxima web. Diseños que convierten y código que rinde.</p>
+      <div class="pt-4">
+        <Button text="Hablemos →" href="/contacto" variant="primary" />
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .filter-btn.active {
+      background-color: var(--accent-color);
+      color: var(--background-primary);
+      border-color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    .project-card-container {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card-container.filtered-out {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+      position: absolute;
+      visibility: hidden;
+    }
+  </style>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card-container');
+    const grid = document.getElementById('projects-grid');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Toggle active class
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.classList.add('text-text-secondary');
+        });
+        button.classList.add('active');
+        button.classList.remove('text-text-secondary');
+
+        const filter = (button as HTMLElement).getAttribute('data-filter');
+
+        // Apply filtering
+        cards.forEach(card => {
+          const category = (card as HTMLElement).getAttribute('data-category');
+          
+          if (filter === 'all' || category === filter) {
+            (card as HTMLElement).classList.remove('filtered-out');
+            (card as HTMLElement).style.position = 'relative';
+            (card as HTMLElement).style.visibility = 'visible';
+          } else {
+            (card as HTMLElement).classList.add('filtered-out');
+            // Using a timeout to wait for fade out before removing from layout
+            setTimeout(() => {
+              if ((card as HTMLElement).classList.contains('filtered-out')) {
+                (card as HTMLElement).style.position = 'absolute';
+                (card as HTMLElement).style.visibility = 'hidden';
+              }
+            }, 300);
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,153 @@
+---
+const { pathname } = Astro.url;
+
+const navLinks = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Proyectos', href: '/proyectos' },
+  { name: 'Servicios', href: '/servicios' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contacto', href: '/contacto' },
+];
+
+const isActive = (href) => {
+  if (href === '/' && pathname === '/') return true;
+  if (href !== '/' && pathname.startsWith(href)) return true;
+  return false;
+};
+---
+
+<nav id="navbar" class="fixed top-0 left-0 w-full h-[80px] z-[100] transition-all duration-500 flex items-center px-6">
+    <div id="navbar-container" class="max-w-[1200px] w-full mx-auto p-4 flex justify-between items-center transition-all duration-500 border border-transparent rounded-[20px] md:px-6">
+      <!-- Logo -->
+      <a href="/" class="flex items-center group transition-transform origin-left">
+        <img src="/logo.png" alt="FACUNDO" class="h-[24px] md:h-[45px] w-auto object-contain brightness-110 mix-blend-screen" />
+      </a>
+
+    <!-- Rest of Navbar Items -->
+
+    <!-- Desktop Navigation -->
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`relative text-[14px] font-medium uppercase tracking-[0.05em] font-body transition-all duration-200 py-1
+              ${isActive(link.href) ? 'text-accent' : 'text-text-secondary hover:text-text-primary'}`}
+          >
+            {link.name}
+            <span 
+              class={`absolute left-0 bottom-0 w-full h-[2px] bg-accent transition-transform duration-300 origin-left
+                ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0 hover:scale-x-100'}`}
+            ></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Button -->
+    <button 
+      id="menu-toggle" 
+      class="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-[110]"
+      aria-label="Abrir Menú"
+    >
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px]"></span>
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px]"></span>
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobile-menu" 
+    class="fixed inset-0 bg-[#080808]/98 z-[105] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 ease-in-out md:hidden"
+  >
+    <ul class="flex flex-col items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`font-display text-[48px] uppercase tracking-wider transition-colors duration-300 mobile-link
+              ${isActive(link.href) ? 'text-accent' : 'text-text-primary hover:text-accent'}`}
+          >
+            {link.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .hamburger-active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Scrolled state for navbar */
+  .nav-scrolled {
+    background-color: rgba(8, 8, 8, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Ensure active link underline stays visible */
+  .scale-x-100 {
+    transform: scaleX(1);
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navContainer = document.getElementById('navbar-container');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  
+  if (navbar && navContainer) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.style.height = '100px';
+        navbar.style.top = '12px';
+        
+        navContainer.classList.add('bg-[#080808]/80', 'backdrop-blur-md', 'border-white/10', 'shadow-[0_8px_32px_rgba(0,0,0,0.4)]');
+        navContainer.classList.remove('border-transparent');
+      } else {
+        navbar.style.height = '80px';
+        navbar.style.top = '0';
+        
+        navContainer.classList.remove('bg-[#080808]/80', 'backdrop-blur-md', 'border-white/10', 'shadow-[0_8px_32px_rgba(0,0,0,0.4)]');
+        navContainer.classList.add('border-transparent');
+      }
+    });
+  }
+
+  // Toggle Mobile Menu
+  menuToggle?.addEventListener('click', () => {
+    menuToggle.classList.toggle('hamburger-active');
+    mobileMenu?.classList.toggle('translate-x-full');
+    document.body.classList.toggle('overflow-hidden');
+  });
+
+  // Close menu on link click
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle?.classList.remove('hamburger-active');
+      mobileMenu?.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-hidden');
+    });
+  });
+
+  // Close menu on resize (if larger than md)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      menuToggle?.classList.remove('hamburger-active');
+      mobileMenu?.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-hidden');
+    }
+  });
+</script>

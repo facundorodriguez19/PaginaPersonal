@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+
+const pageTitle = "Contacto";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <!-- Header -->
+  <header class="pt-[120px] pb-12 px-6 bg-transparent">
+    <div class="max-w-[1200px] mx-auto flex flex-col items-center text-center">
+      <span class="text-accent font-body text-xs uppercase tracking-[0.2rem] mb-4 border-l-2 border-accent pl-4">/ CONTACTO</span>
+      <h1 class="mb-6">Hablemos</h1>
+      <p class="text-text-secondary text-lg max-w-[600px] font-body leading-relaxed">
+        Contame qué necesitás y te respondo en menos de 24hs. Si tenés una idea madurando o un problema técnico urgente, soy tu desarrollador.
+      </p>
+    </div>
+  </header>
+
+  <section class="max-w-[1200px] mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-16">
+    <!-- LEFT: Contact Form -->
+    <div class="bg-card border border-border rounded-card p-8 md:p-12">
+      <form 
+        id="contact-form"
+        action="https://formspree.io/f/YOUR_FORM_ID" 
+        method="POST"
+        class="flex flex-col gap-6"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex flex-col">
+            <label for="name" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Tu nombre</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              placeholder="Facundo Rodriguez" 
+              required
+              class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="email" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Tu email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="juan@empresa.com" 
+              required
+              class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex flex-col">
+            <label for="service" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">¿Qué necesitás?</label>
+            <select 
+              id="service" 
+              name="service"
+              class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm cursor-pointer appearance-none"
+            >
+              <option value="">Seleccioná un servicio...</option>
+              <option value="custom-dev">Desarrollo Web a Medida (PHP/JS)</option>
+              <option value="wordpress">Sitio WordPress</option>
+              <option value="landing">Landing Page</option>
+              <option value="maintenance">Mantenimiento Web</option>
+              <option value="other">Otra consulta</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label for="budget" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Presupuesto aproximado</label>
+            <select 
+              id="budget" 
+              name="budget"
+              class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm cursor-pointer appearance-none"
+            >
+              <option value="low">Menos de USD 200</option>
+              <option value="med">USD 200 - 500</option>
+              <option value="high">USD 500 - 1000</option>
+              <option value="very-high">Más de USD 1000</option>
+              <option value="idk">No lo tengo claro aún</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="message" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Contame tu proyecto</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="5" 
+            placeholder="Describí brevemente qué querés hacer, qué plazos tenés, y cualquier detalle relevante que me sirva para entenderte mejor." 
+            required
+            class="bg-transparent/50 border border-border rounded-[4px] px-4 py-4 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm resize-none"
+          ></textarea>
+        </div>
+
+        <div class="pt-2">
+          <Button text="Enviar mensaje →" type="submit" variant="primary" class="w-full h-14" />
+        </div>
+
+        <!-- Success Message -->
+        <div id="form-success" class="hidden mt-6 p-4 bg-accent/10 border border-accent/20 rounded-btn flex items-center gap-3 animate-fadeIn">
+          <div class="w-8 h-8 bg-accent text-primary rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <p class="text-accent font-bold font-body text-sm">¡Mensaje enviado! Te respondo en menos de 24hs.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT: Info Cards -->
+    <div class="flex flex-col gap-8">
+      <!-- Info Grids -->
+      <div class="grid grid-cols-1 gap-6">
+        <!-- Card 1 -->
+        <div class="glass-card p-6 flex items-center gap-4">
+          <div class="p-3 bg-white/5 border border-border rounded-badge text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-text-muted text-[11px] uppercase tracking-widest font-bold">Tiempo de respuesta</span>
+            <span class="text-text-primary font-bold font-body">Menos de 24 horas hábiles</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass-card p-6 flex items-center gap-4">
+          <div class="p-3 bg-white/5 border border-border rounded-badge text-accent relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse border-2 border-primary"></span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-text-muted text-[11px] uppercase tracking-widest font-bold">Disponibilidad</span>
+            <span class="text-text-primary font-bold font-body">Abierto a nuevos proyectos</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-card p-6 flex items-center gap-4">
+          <div class="p-3 bg-white/5 border border-border rounded-badge text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-text-muted text-[11px] uppercase tracking-widest font-bold">Modalidad</span>
+            <span class="text-text-primary font-bold font-body">100% remoto · Argentina y región</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Links Section -->
+      <div class="mt-8 flex flex-col gap-6">
+        <h3 class="text-xl font-display uppercase tracking-widest text-text-primary">También podés escribirme en:</h3>
+        <div class="flex flex-col gap-4">
+          <a href="https://github.com/facundorodriguez19" target="_blank" class="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors font-body group">
+            <div class="p-1.5 border border-border rounded-sm group-hover:border-accent group-hover:bg-accent/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+            </div>
+            github.com/facundorodriguez19
+          </a>
+          <a href="https://www.linkedin.com/in/facundo-rodriguez-16169014b/" target="_blank" class="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors font-body group">
+             <div class="p-1.5 border border-border rounded-sm group-hover:border-accent group-hover:bg-accent/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </div>
+            linkedin.com/in/facundo-rodriguez-16169014b/
+          </a>
+        </div>
+        
+        <div class="pt-6">
+          <a 
+            href="https://wa.me/5581973440041" 
+            target="_blank"
+            class="inline-flex items-center justify-center gap-3 w-full py-4 bg-[#25D366] text-white font-bold rounded-btn transition-all duration-300 hover:brightness-110 active:scale-[0.98] shadow-lg shadow-[#25D366]/20"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Escribime por WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    /* Custom Select Arrow */
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.2rem;
+    }
+  </style>
+
+  <script>
+    // Simple Form Submission Handler (simulated for UI)
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const successMsg = document.getElementById('form-success');
+
+    if (form && successMsg) {
+      form.addEventListener('submit', async (e) => {
+        // Here you would normally handle the Formspree submission via AJAX if you want to keep the success message on the same page
+        // But the default behavior is a redirect. 
+        // We'll simulate a local success shown before redirecting or just UI behavior if they stay.
+        // For actual production use with the success message on-page, we'd use fetch().
+        
+        console.log('Form submitted');
+        // successMsg.classList.remove('hidden'); // Show if handling via fetch
+      });
+    }
+  </script>
+</BaseLayout>

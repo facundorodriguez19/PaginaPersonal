@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-primary: #080808;
+  --background-secondary: #0f0f0f;
+  --background-card: #141414;
+  --background-card-hover: #1a1a1a;
+  --border-color: #1e1e1e;
+  --border-hover: #2e2e2e;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --accent-color: #00d4aa;
+  --accent-hover: #00f0c0;
+  --accent-glow: rgba(0, 212, 170, 0.15);
+  --tag-php: #ff6b6b;
+  --tag-js: #f7df1e;
+  --tag-wp: #21759b;
+  --glow-color: rgba(0, 212, 170, 0.05);
+}
+
+@layer base {
+  html {
+    background-color: #080808;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply text-text-primary font-body;
+    background-color: transparent !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-text-primary uppercase tracking-wider;
+  }
+
+  /* Typography Scale */
+  .display-title {
+    @apply font-display text-[48px] md:text-[80px] leading-none tracking-[0.02em];
+  }
+
+  h1 {
+    @apply text-[36px] md:text-[56px] leading-[1.1];
+  }
+
+  h2 {
+    @apply text-[28px] md:text-[40px] leading-[1.2];
+  }
+
+  h3 {
+    @apply font-body font-bold text-[18px] md:text-[22px] lowercase tracking-normal;
+    /* User specified DM Sans Bold 700 for H3 */
+    text-transform: none; 
+  }
+
+  p {
+    @apply text-text-secondary leading-[1.7] text-[16px];
+  }
+
+  .caption {
+    @apply text-[13px] text-text-secondary;
+  }
+
+  code, kbd, pre, samp {
+    @apply font-mono text-[12px];
+  }
+
+  /* Accessibility Focus Styles */
+  a:focus-visible, 
+  button:focus-visible, 
+  input:focus-visible, 
+  select:focus-visible, 
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-primary;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-primary font-display text-lg tracking-widest rounded-btn transition-all duration-300 hover:bg-accent-hover hover:shadow-[0_0_20px_var(--accent-glow)] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-border text-text-primary font-display text-lg tracking-widest rounded-btn transition-all duration-300 hover:border-accent hover:text-accent active:scale-[0.98];
+  }
+
+  .glass-card {
+    @apply bg-[#111111]/60 backdrop-blur-md border border-white/5 rounded-card transition-all duration-500 hover:border-accent/30 hover:bg-[#161616]/80 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)];
+  }
+
+  .glow-soft {
+    @apply relative overflow-hidden;
+  }
+
+  .glow-soft::before {
+    content: '';
+    @apply absolute inset-0 bg-accent/5 blur-[100px] pointer-events-none rounded-full transition-opacity duration-1000;
+  }
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}

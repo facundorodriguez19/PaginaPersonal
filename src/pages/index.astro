@@ -1,0 +1,337 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import TechBadge from '../components/TechBadge.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { projects } from '../data/projects.js';
+
+const pageTitle = "Inicio";
+
+const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+
+
+const servicesSet = [
+  {
+     id: 1,
+     title: "Desarrollo Web a Medida",
+     description: "Aplicaciones y sitios web construidos desde cero en PHP o JavaScript puro. Calidad de código garantizada.",
+     icon: "code" as const
+  },
+  {
+     id: 2,
+     title: "Sitios WordPress",
+     description: "Sitios institucionales y tiendas con Elementor o Divi, rápidos, seguros y fáciles de editar por vos.",
+     icon: "wordpress" as const
+  },
+  {
+     id: 3,
+     title: "Landing Pages",
+     description: "Páginas de aterrizaje optimizadas para convertir visitas en clientes reales. Ideales para tus campañas.",
+     icon: "rocket" as const
+  },
+  {
+     id: 4,
+     title: "Mantenimiento",
+     description: "Actualizaciones, backups, seguridad y soporte continuo para que tu sitio nunca te deje a gamba.",
+     icon: "wrench" as const
+  }
+];
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Facundo Rodriguez",
+      "jobTitle": "Desarrollador Web Freelance",
+      "url": "https://facundoweb.com",
+      "sameAs": [
+        "https://github.com/facundorodriguez19",
+        "https://www.linkedin.com/in/facundo-rodriguez-16169014b/"
+      ]
+    }
+  </script>
+  <!-- SECTION 1: HERO -->
+  <section class="relative min-h-[100vh] flex items-center justify-center pt-32 lg:pt-20 overflow-hidden bg-transparent">
+    <!-- Background Glow Texture -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[140px] -mr-40 -mt-40 pointer-events-none"></div>
+
+    <div class="max-w-[1200px] w-full mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 items-center relative z-10">
+      <!-- Left Column -->
+      <div class="flex flex-col gap-8 animate-container">
+        <!-- Availability Badge -->
+        <div class="flex items-center gap-3 self-start px-3.5 py-1.5 border border-border-hover rounded-badge bg-card/50 backdrop-blur-sm animate-item">
+          <span class="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_var(--accent-color)]"></span>
+          <span class="text-[12px] font-body text-text-secondary uppercase tracking-[0.1em]">Disponible para proyectos</span>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="flex flex-col font-display leading-[1.0] animate-item">
+          <span class="text-[52px] md:text-[88px] text-text-primary tracking-tight">Desarrollador</span>
+          <span class="text-[52px] md:text-[88px] text-text-primary tracking-tight">Web</span>
+          <span class="text-[52px] md:text-[88px] text-accent tracking-normal drop-shadow-[0_0_20px_rgba(0,212,170,0.15)]">Freelance.</span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="text-text-secondary text-[18px] md:text-[20px] max-w-[480px] leading-[1.8] font-body animate-item">
+          Desarrollo sitios y aplicaciones web en <span class="text-text-primary font-medium">PHP, JavaScript y WordPress</span>. Transformo ideas en productos digitales reales que generan resultados.
+        </p>
+
+        <!-- Tech Stack Badges -->
+        <div class="flex flex-wrap gap-2 animate-item">
+          <TechBadge text="PHP" />
+          <TechBadge text="JavaScript" />
+          <TechBadge text="WordPress" />
+          <TechBadge text="Elementor" />
+          <TechBadge text="Divi" />
+          <TechBadge text="HTML/CSS" />
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-4 pt-4 animate-item">
+          <Button text="Ver mis proyectos →" href="/proyectos" variant="primary" />
+          <Button text="Contactame" href="/contacto" variant="secondary" />
+        </div>
+      </div>
+
+      <!-- Right Column: Code Card -->
+      <div class="hidden lg:flex justify-center items-center animate-item-delayed">
+        <div class="relative w-full max-w-[420px] bg-[#0f0f0f] border border-border rounded-card p-1 shadow-2xl rotate-[-2deg] transition-all duration-500 hover:rotate-0 hover:scale-[1.02]">
+          <div class="flex items-center px-4 py-3 border-b border-border/50">
+            <div class="flex gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+            </div>
+            <span class="text-text-muted text-[12px] font-mono mx-auto">portfolio.js</span>
+          </div>
+          
+          <div class="p-6 font-mono text-[14px] leading-relaxed">
+            <p class="text-[#c678dd]">const <span class="text-[#e06c75]">developer</span> = <span class="text-[#abb2bf]">{</span></p>
+            <p class="pl-4"><span class="text-[#e06c75]">name</span>: <span class="text-[#98c379]">"Facundo Rodriguez"</span>,</p>
+            <p class="pl-4"><span class="text-[#e06c75]">role</span>: <span class="text-[#98c379]">"Freelance Web Dev"</span>,</p>
+            <p class="pl-4"><span class="text-[#e06c75]">skills</span>: <span class="text-[#abb2bf]">[</span><span class="text-[#98c379]">"PHP", "JS", "WP"</span><span class="text-[#abb2bf]">]</span>,</p>
+            <p class="pl-4"><span class="text-[#e06c75]">available</span>: <span class="text-[#d19a66]">true</span>,</p>
+            <p class="pl-4"><span class="text-[#e06c75]">projects</span>: <span class="text-[#d19a66]">7</span>,</p>
+            <p class="pl-4"><span class="text-[#e06c75]">location</span>: <span class="text-[#98c379]">"Brasil"</span></p>
+            <p class="text-[#abb2bf]">};</p>
+            <p class="mt-4 text-text-muted text-[12px] opacity-60 italic">// Listo para tu próximo proyecto</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ESTADÍSTICAS -->
+  <section class="bg-transparent border-y border-border py-12 px-6">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 divide-x-0 lg:divide-x lg:divide-border/50">
+      <div class="flex flex-col items-center text-center px-4 reveal" data-delay="0">
+        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="7">0</span>
+        <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Proyectos Completados</span>
+      </div>
+      <div class="flex flex-col items-center text-center px-4 reveal" data-delay="100">
+        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="4">0</span>
+        <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Clientes Reales</span>
+      </div>
+      <div class="flex flex-col items-center text-center px-4 reveal" data-delay="200">
+        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="3">0</span>
+        <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Tecnologías Principales</span>
+      </div>
+      <div class="flex flex-col items-center text-center px-4 reveal" data-delay="300">
+        <div class="flex items-baseline">
+          <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="100">0</span>
+          <span class="font-display text-xl md:text-3xl text-accent">%</span>
+        </div>
+        <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Compromiso con el Cliente</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 3: PROYECTOS DESTACADOS -->
+  <section class="py-24 px-6 bg-transparent">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex flex-col mb-16 reveal">
+        <span class="text-accent font-body text-xs uppercase tracking-[0.2rem] mb-4 border-l-2 border-accent pl-4">/ PROYECTOS</span>
+        <h2 class="mb-4">Trabajo Real, Resultados Reales</h2>
+        <p class="text-text-secondary text-lg max-w-[600px] font-body leading-relaxed">
+          No demos. No templates. Proyectos construidos para clientes y para mí.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {featuredProjects.map((project, index) => (
+          <div class="reveal" data-delay={index * 100}>
+            <ProjectCard {...project} />
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center reveal" data-delay="400">
+        <Button text="Ver todos los proyectos →" href="/proyectos" variant="outline" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SERVICIOS -->
+  <section class="py-24 px-6 bg-transparent">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex flex-col mb-16 items-center text-center reveal">
+        <span class="text-accent font-body text-xs uppercase tracking-[0.2rem] mb-4">/ SERVICIOS</span>
+        <h2 class="mb-4">¿En qué puedo ayudarte?</h2>
+        <p class="text-text-secondary text-lg max-w-[600px] font-body leading-relaxed">
+          Desarrollo soluciones web adaptadas a cada necesidad y presupuesto.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {servicesSet.map((service, index) => (
+          <div class="reveal" data-delay={index * 100}>
+            <ServiceCard {...service} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: SOBRE MÍ (mini) -->
+  <section class="py-24 px-6 bg-transparent">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 items-center">
+      <div class="flex flex-col gap-8 reveal" data-delay="0">
+        <span class="text-accent font-body text-xs uppercase tracking-[0.2rem] mb-2 border-l-2 border-accent pl-4">/ SOBRE MÍ</span>
+        <h2 class="leading-tight">Un desarrollador que entrega lo que promete</h2>
+        <div class="flex flex-col gap-6 font-body text-text-secondary leading-relaxed text-lg">
+          <p>Soy desarrollador web freelance con experiencia en <span class="text-text-primary">PHP, JavaScript y WordPress</span>. Trabajo con clientes reales en proyectos que necesitan resultados concretos.</p>
+          <p>Cada proyecto que arranco lo termino. Sin excusas, sin proyectos abandonados. Tu sitio sale cuando decimos que sale.</p>
+          <p>Además de trabajar para clientes, desarrollo mis propios proyectos y escribo sobre lo que aprendo.</p>
+        </div>
+        <div class="pt-4">
+          <Button text="Contactame" href="/contacto" variant="primary" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-0 border border-border bg-transparent rounded-card p-4 reveal" data-delay="200">
+        {[
+          "Entrego en tiempo y forma",
+          "Código limpio y documentado",
+          "Comunicación clara y constante",
+          "Precios transparentes, sin sorpresas",
+          "Soporte post-lanzamiento"
+        ].map((valor) => (
+          <div class="flex items-center gap-4 py-5 border-b border-border/50 last:border-0 px-4 group hover:bg-white/5 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span class="font-body text-text-primary font-medium">{valor}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: CTA FINAL -->
+  <section class="py-32 px-6 relative overflow-hidden bg-transparent">
+    <!-- Glow effect -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="max-w-[600px] mx-auto text-center relative z-10 flex flex-col gap-8 reveal">
+      <h2 class="text-5xl md:text-[56px] font-display uppercase tracking-wider leading-none">¿Tenés un proyecto en mente?</h2>
+      <p class="text-text-secondary text-lg font-body max-w-[500px] mx-auto">
+        Escribime y hablemos. La primera consulta es gratis.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+        <Button text="Empezar proyecto →" href="/contacto" variant="primary" />
+        <Button text="Ver mis proyectos" href="/proyectos" variant="secondary" />
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Hero animations */
+    .animate-container { perspective: 1000px; }
+    .animate-item {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .animate-item:nth-child(1) { animation-delay: 0.1s; }
+    .animate-item:nth-child(2) { animation-delay: 0.2s; }
+    .animate-item:nth-child(3) { animation-delay: 0.3s; }
+    .animate-item:nth-child(4) { animation-delay: 0.4s; }
+    .animate-item:nth-child(5) { animation-delay: 0.5s; }
+
+    .animate-item-delayed {
+      opacity: 0;
+      transform: scale(0.95) rotate(-2deg);
+      animation: zoomFade 1s ease 0.6s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomFade {
+      to { opacity: 1; transform: scale(1) rotate(-2deg); }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.6s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const statNumbers = document.querySelectorAll('.stat-number');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt((entry.target as HTMLElement).getAttribute('data-delay') || '0');
+          setTimeout(() => {
+            entry.target.classList.add('active');
+            
+            // If it's a stat number, start counting
+            const statNum = entry.target.querySelector('.stat-number');
+            if (statNum) startCounter(statNum as HTMLElement);
+            else if (entry.target.classList.contains('stat-number')) startCounter(entry.target as HTMLElement);
+          }, delay);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const startCounter = (el: HTMLElement) => {
+      if (el.getAttribute('data-started')) return;
+      el.setAttribute('data-started', 'true');
+      
+      const target = parseInt(el.getAttribute('data-target') || '0');
+      const duration = 2000;
+      const startTime = performance.now();
+      
+      const update = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        el.textContent = current.toString();
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target.toString();
+        }
+      };
+      
+      requestAnimationFrame(update);
+    };
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+</BaseLayout>

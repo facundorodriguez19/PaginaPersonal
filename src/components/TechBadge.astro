@@ -1,0 +1,10 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<span class="inline-flex items-center px-[10px] py-[4px] text-[12px] font-medium bg-white/[0.04] border border-border text-text-secondary rounded-badge tracking-wider font-body whitespace-nowrap">
+  {text}
+</span>

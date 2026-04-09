@@ -1,0 +1,94 @@
+---
+interface Props {
+  title: string;
+  url: string;
+  description: string;
+  stack: string[];
+  image?: string;
+  featured?: boolean;
+}
+
+const { title, url, description, stack, image, featured = false } = Astro.props;
+
+// Logic to pick a "primary" tech color for the placeholder background
+const techColors: Record<string, string> = {
+  'PHP': '#ff6b6b',
+  'JavaScript': '#f7df1e',
+  'JS': '#f7df1e',
+  'WordPress': '#21759b',
+  'WP': '#21759b',
+  'Astro': '#ff5d01',
+  'Tailwind': '#38bdf8',
+  'Node.js': '#68a063',
+};
+
+const primaryTech = stack[0] || 'Astro';
+const baseColor = techColors[primaryTech] || '#00d4aa';
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="glass-card flex flex-col group overflow-hidden h-full transition-all duration-500 hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,212,170,0.15)] relative">
+  <!-- Subtle Gradient Glow -->
+  <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/5 rounded-full blur-[80px] group-hover:bg-accent/10 transition-colors duration-500"></div>
+  
+  <!-- Top section: 220px image area or placeholder -->
+  <div 
+    class="h-[220px] w-full relative flex items-center justify-center overflow-hidden"
+    style={!image ? `background: linear-gradient(135deg, ${baseColor}33 0%, ${baseColor}66 100%)` : ''}
+  >
+    {image ? (
+      <img 
+        src={image} 
+        alt={title} 
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        loading="lazy"
+      />
+    ) : (
+      <>
+        <!-- Decorative Grid/Pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+        
+        <span class="font-display text-4xl text-white/20 uppercase tracking-widest group-hover:scale-110 transition-transform duration-500 group-hover:text-white/40">
+          {title}
+        </span>
+      </>
+    )}
+
+    {featured && (
+      <span class="absolute top-4 right-4 bg-accent text-primary text-[10px] font-bold px-2 py-1 rounded-badge uppercase tracking-widest z-10">
+        Destacado
+      </span>
+    )}
+  </div>
+
+  <!-- Body padding: 24px -->
+  <div class="p-6 flex flex-col flex-1 gap-4">
+    <!-- Tech stack tags -->
+    <div class="flex flex-wrap gap-2">
+      {stack.map((tag) => (
+        <span class={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-badge tracking-wider font-mono border
+          ${tag === 'PHP' ? 'bg-[#ff6b6b]/10 text-[#ff6b6b] border-[#ff6b6b]/20' : 
+            tag === 'JavaScript' || tag === 'JS' ? 'bg-[#f7df1e]/10 text-[#f7df1e] border-[#f7df1e]/20' : 
+            tag === 'WordPress' || tag === 'WP' ? 'bg-[#21759b]/10 text-[#21759b] border-[#21759b]/20' : 
+            tag === 'Astro' ? 'bg-[#ff5d01]/10 text-[#ff5d01] border-[#ff5d01]/20' : 
+            'bg-white/5 text-text-muted border-border'}`}>
+
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <h3 class="text-[18px] font-bold font-body group-hover:text-accent transition-colors">{title}</h3>
+    
+    <!-- line-clamp 2 lines -->
+    <p class="text-text-secondary text-[14px] line-clamp-2 leading-relaxed flex-1 font-body">
+      {description}
+    </p>
+
+    <div class="pt-4 mt-auto border-t border-border flex items-center justify-between">
+      <span class="text-accent text-[14px] font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all font-body">
+        Ver proyecto <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </span>
+    </div>
+  </div>
+</a>
+

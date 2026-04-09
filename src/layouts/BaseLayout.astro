@@ -1,0 +1,119 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  pageTitle: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { 
+  pageTitle, 
+  description = "Desarrollador Web Freelance especializado en PHP, JavaScript y WordPress.", 
+  ogImage = "/images/og-image.jpg" 
+} = Astro.props;
+
+const siteName = "Facundo Rodriguez";
+
+const fullTitle = `${siteName} | Desarrollador Web`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://facundoweb.com');
+---
+
+<!DOCTYPE html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Tags -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="desarrollador web freelance, PHP, JavaScript, WordPress, Elementor, Divi, Argentina" />
+    <meta name="author" content="Facundo Rodriguez" />
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, canonicalURL)} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(ogImage, canonicalURL)} />
+
+    <!-- Fonts Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    
+    <slot name="head" />
+  </head>
+  <body class="bg-[#080808] text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden min-h-screen relative">
+    <!-- 1. Ambient Background Layer (z-0) -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      <!-- Top Left Accent Glow -->
+      <div class="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-accent/25 rounded-full blur-[140px] animate-pulse-slow"></div>
+      
+      <!-- Middle Right Muted Glow -->
+      <div class="absolute top-[40%] -right-24 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]"></div>
+      
+      <!-- Bottom Left Accent Glow -->
+      <div class="absolute -bottom-[10%] -left-[10%] w-[60%] h-[60%] bg-accent/20 rounded-full blur-[140px] opacity-60"></div>
+
+      <!-- Vertical Ambient Gradient -->
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent opacity-30"></div>
+      
+      <!-- Grid Pattern (High Visibility) -->
+      <div class="absolute inset-0 opacity-[0.15]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 64px 64px;"></div>
+      
+      <!-- Noise Texture for grain -->
+      <div class="absolute inset-0 opacity-[0.05] mix-blend-overlay" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    </div>
+
+    <!-- 2. Content Layer (z-10) -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <!-- Skip to content -->
+      <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:px-6 focus:py-3 focus:bg-accent focus:text-primary focus:font-bold focus:rounded-btn focus:outline-none focus:ring-4 focus:ring-accent/20">
+        Saltar al contenido principal
+      </a>
+
+      <!-- Progress Bar -->
+      <div id="scroll-progress-container" class="fixed top-0 left-0 w-full h-[2px] z-[120] bg-transparent pointer-events-none">
+        <div id="scroll-progress-bar" class="h-full bg-accent w-0 transition-all duration-100 ease-out shadow-[0_0_10px_#00d4aa]"></div>
+      </div>
+
+      <Navbar />
+      
+      <main id="main" class="flex-grow pt-[80px]">
+        <slot />
+      </main>
+      
+      <Footer />
+    </div>
+
+    <script>
+      // Scroll Progress Logic
+      const progressBar = document.getElementById('scroll-progress-bar');
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progressBar) {
+          progressBar.style.width = scrolled + "%";
+        }
+      });
+    </script>
+  </body>
+</html>

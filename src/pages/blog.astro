@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogCard from '../components/BlogCard.astro';
+import BlogModal from '../components/BlogModal.astro';
 import Button from '../components/Button.astro';
 import { blogPosts } from '../data/blog-posts.js';
 
@@ -24,7 +25,7 @@ const remainingPosts = blogPosts.slice(1);
   <section class="max-w-[1200px] mx-auto px-6 pb-24">
     <!-- Featured Article -->
     <div class="mb-16">
-      <a href={`/blog/${featuredPost.slug}`} class="glass-card flex flex-col lg:flex-row group overflow-hidden border transition-all duration-300 hover:border-border-hover relative">
+      <a href={`/blog/${featuredPost.slug}`} data-blog-slug={featuredPost.slug} class="glass-card flex flex-col lg:flex-row group overflow-hidden border transition-all duration-300 hover:border-border-hover relative">
         <span class="absolute top-6 left-6 z-10 bg-accent text-[#080808] text-[10px] font-bold px-2 py-1 rounded-badge uppercase tracking-widest">Artículo destacado</span>
         
         <!-- Left: Content area -->
@@ -72,4 +73,6 @@ const remainingPosts = blogPosts.slice(1);
 
     
   </section>
+
+  <BlogModal />
 </BaseLayout>

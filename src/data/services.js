@@ -14,7 +14,7 @@ export const services = [
       "Deploy en servidor o VPS"
     ],
     idealFor: "Aplicaciones web, sistemas de gestión, intranets, herramientas internas",
-    priceRange: "Desde USD 500",
+    priceRange: "Desde R$ 2500",
     deliveryTime: "2-6 semanas"
   },
   {
@@ -32,7 +32,7 @@ export const services = [
       "Capacitación para que puedas editar el contenido"
     ],
     idealFor: "Empresas, profesionales, emprendimientos, portfolios",
-    priceRange: "Desde USD 300",
+    priceRange: "Desde R$ 1500",
     deliveryTime: "1-3 semanas"
   },
   {
@@ -50,7 +50,7 @@ export const services = [
       "Analítica básica con Google Analytics"
     ],
     idealFor: "Lanzamientos de productos, campañas publicitarias, servicios específicos",
-    priceRange: "Desde USD 150",
+    priceRange: "Desde R$ 800",
     deliveryTime: "3-7 días"
   },
   {
@@ -68,7 +68,7 @@ export const services = [
       "Reporte mensual de rendimiento"
     ],
     idealFor: "Sitios existentes en WordPress, tiendas WooCommerce",
-    priceRange: "Desde USD 50/mes",
+    priceRange: "Desde R$ 300/mes",
     deliveryTime: "Servicio mensual"
   }
 ];

@@ -1,5 +1,20 @@
 export const projects = [
   {
+    id: 10,
+    title: "Tu Mejor Versión Online",
+    slug: "tu-mejor-version-online",
+    url: "https://tumejorversiononline.com",
+    image: "/images/projects/tu-mejor-version.png",
+    stack: ["WordPress", "Divi"],
+    category: "wordpress",
+    description: "Plataforma de coaching y desarrollo personal construida con WordPress y Divi. Enfoque en captación de leads y diseño motivacional.",
+    longDescription: "Proyecto para coach de desarrollo personal. Diseño de sitio institucional y blog con Divi, optimización de conversiones, integración de formularios y landing pages para mentorías.",
+    featured: false,
+    year: 2024,
+    type: "Sitio de Coaching",
+    client: true
+  },
+  {
     id: 1,
     title: "Carolandia",
     slug: "carolandia",
@@ -103,6 +118,21 @@ export const projects = [
   },
   {
     id: 8,
+    title: "Sunchales Distribuciones",
+    slug: "sunchales-distribuciones",
+    url: "https://sunchalesdistribuciones.com.ar",
+    image: "/images/projects/sunchales.png",
+    stack: ["WordPress", "Elementor Pro"],
+    category: "wordpress",
+    description: "E-commerce mayorista de productos alimenticios desarrollado con WordPress y Elementor. Catálogo de productos completo y sistema de pedidos.",
+    longDescription: "Proyecto para distribuidora de alimentos. Implementación de tienda mayorista con WordPress y Elementor Pro, incluyendo gestión de categorías, buscadores avanzados y optimización para ventas.",
+    featured: true,
+    year: 2024,
+    type: "Sitio E-commerce",
+    client: true
+  },
+  {
+    id: 9,
     title: "Portfolio Personal",
     slug: "portfolio-2024",
     url: "/",

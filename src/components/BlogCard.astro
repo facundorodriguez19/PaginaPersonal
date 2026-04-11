@@ -13,7 +13,7 @@ interface Props {
 const { title, excerpt, category, categoryColor, date, readTime, coverGradient, slug } = Astro.props;
 ---
 
-<a href={`/blog/${slug}`} class="glass-card flex flex-col group overflow-hidden border transition-all duration-300 hover:border-border-hover hover:-translate-y-1">
+<a href={`/blog/${slug}`} data-blog-slug={slug} class="glass-card flex flex-col group overflow-hidden border transition-all duration-300 hover:border-border-hover hover:-translate-y-1">
   <!-- Cover Gradient Area -->
   <div 
     class="h-[180px] w-full relative"

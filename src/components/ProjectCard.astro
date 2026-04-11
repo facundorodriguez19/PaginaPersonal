@@ -8,15 +8,7 @@ interface Props {
   featured?: boolean;
 }
 
-import { Image } from 'astro:assets';
 const { title, url, description, stack, image, featured = false } = Astro.props;
-
-// Dynamically import all images from assets
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/projects/*.{jpeg,jpg,png,gif}');
-const imagePath = image ? `/src/assets${image}` : '';
-if (image && !images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/images/projects/*.{jpeg,jpg,png,gif}"`);
-
-const imageObj = image ? (await images[imagePath]()).default : null;
 
 // Logic to pick a "primary" tech color for the placeholder background
 const techColors: Record<string, string> = {
@@ -44,20 +36,14 @@ const baseColor = techColors[primaryTech] || '#00d4aa';
     class="h-[220px] w-full relative flex items-center justify-center overflow-hidden"
     style={!image ? `background: linear-gradient(135deg, ${baseColor}33 0%, ${baseColor}66 100%)` : ''}
   >
-    {image && imageObj ? (
-      <Image 
-        src={imageObj} 
+    {image ? (
+      <img 
+        src={image} 
         alt={title} 
-        width={400}
-        height={220}
-        format="webp"
-        quality={80}
         class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         loading={featured ? "eager" : "lazy"}
       />
     ) : (
-
-
       <>
         <!-- Decorative Grid/Pattern -->
         <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
@@ -79,17 +65,23 @@ const baseColor = techColors[primaryTech] || '#00d4aa';
   <div class="p-6 flex flex-col flex-1 gap-4">
     <!-- Tech stack tags -->
     <div class="flex flex-wrap gap-2">
-      {stack.map((tag) => (
-        <span class={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-badge tracking-wider font-mono border
-          ${tag === 'PHP' ? 'bg-[#ff6b6b]/10 text-[#ff6b6b] border-[#ff6b6b]/20' : 
-            tag === 'JavaScript' || tag === 'JS' ? 'bg-[#f7df1e]/10 text-[#f7df1e] border-[#f7df1e]/20' : 
-            tag === 'WordPress' || tag === 'WP' ? 'bg-[#21759b]/10 text-[#21759b] border-[#21759b]/20' : 
-            tag === 'Astro' ? 'bg-[#ff5d01]/10 text-[#ff5d01] border-[#ff5d01]/20' : 
-            'bg-white/5 text-text-muted border-border'}`}>
+      {stack.map((tag) => {
+        let tagStyles = 'bg-white/10 text-text-primary border-white/20'; // Default more visible
+        
+        if (tag === 'PHP') tagStyles = 'bg-[#ff6b6b]/20 text-[#ff6b6b] border-[#ff6b6b]/30';
+        else if (tag === 'JavaScript' || tag === 'JS') tagStyles = 'bg-[#f7df1e]/20 text-[#f7df1e] border-[#f7df1e]/30';
+        else if (tag === 'WordPress' || tag === 'WP') tagStyles = 'bg-[#21759b]/20 text-[#21759b] border-[#21759b]/30';
+        else if (tag === 'Astro') tagStyles = 'bg-[#ff5d01]/20 text-[#ff5d01] border-[#ff5d01]/30';
+        else if (tag.includes('Elementor')) tagStyles = 'bg-[#92003b]/20 text-[#ff3d93] border-[#ff3d93]/30';
+        else if (tag === 'Tailwind') tagStyles = 'bg-[#38bdf8]/20 text-[#38bdf8] border-[#38bdf8]/30';
+        else if (tag === 'Divi') tagStyles = 'bg-[#8300e9]/20 text-[#a435f0] border-[#a435f0]/30';
 
-          {tag}
-        </span>
-      ))}
+        return (
+          <span class={`text-[10px] uppercase font-bold px-2 py-1 rounded-[4px] tracking-wider font-mono border transition-colors ${tagStyles}`}>
+            {tag}
+          </span>
+        );
+      })}
     </div>
 
     <h3 class="text-[18px] font-bold font-body group-hover:text-accent transition-colors">{title}</h3>

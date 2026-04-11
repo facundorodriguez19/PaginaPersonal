@@ -4,20 +4,18 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 interface Props {
-  pageTitle: string;
+  pageTitle?: string;
   description?: string;
   ogImage?: string;
 }
 
 const { 
   pageTitle, 
-  description = "Desarrollador Web Freelance especializado en PHP, JavaScript y WordPress.", 
+  description = "Obtenga un sitio web profesional de alto impacto diseñado para convertir visitantes en clientes. Soluciones a medida con PHP, JS y WordPress para su éxito.", 
   ogImage = "/images/og-image.jpg" 
 } = Astro.props;
 
-const siteName = "Facundo Rodriguez";
-
-const fullTitle = `${siteName} | Desarrollador Web`;
+const fullTitle = pageTitle ? `${pageTitle} | Facundo Rodriguez` : `Desarrollo Web Freelance | Potenciamos tu Negocio Online`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://facundoweb.com');
 ---
 
@@ -26,7 +24,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://facundow
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     
     <!-- SEO Tags -->

@@ -22,17 +22,22 @@ const pageTitle = "Contacto";
     <div class="bg-card border border-border rounded-card p-8 md:p-12">
       <form 
         id="contact-form"
-        action="https://formspree.io/f/YOUR_FORM_ID" 
+        action="https://formsubmit.co/8d01ad178e4d8ebd7be473e018a1a68b" 
         method="POST"
         class="flex flex-col gap-6"
       >
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="redirect-url" value="">
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="flex flex-col">
             <label for="name" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Tu nombre</label>
             <input 
               type="text" 
-              id="name" 
               name="name" 
+              id="name"
               placeholder="Facundo Rodriguez" 
               required
               class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm"
@@ -42,9 +47,9 @@ const pageTitle = "Contacto";
             <label for="email" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Tu email</label>
             <input 
               type="email" 
-              id="email" 
               name="email" 
-              placeholder="juan@empresa.com" 
+              id="email"
+              placeholder="tu@email.com" 
               required
               class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm"
             />
@@ -60,11 +65,11 @@ const pageTitle = "Contacto";
               class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm cursor-pointer appearance-none"
             >
               <option value="">Seleccioná un servicio...</option>
-              <option value="custom-dev">Desarrollo Web a Medida (PHP/JS)</option>
-              <option value="wordpress">Sitio WordPress</option>
-              <option value="landing">Landing Page</option>
-              <option value="maintenance">Mantenimiento Web</option>
-              <option value="other">Otra consulta</option>
+              <option value="Desarrollo a Medida (PHP/JS)">Desarrollo Web a Medida (PHP/JS)</option>
+              <option value="WordPress con Elementor/Divi">Sitio WordPress</option>
+              <option value="Landing Page Optimizada">Landing Page</option>
+              <option value="Mantenimiento Web">Mantenimiento Web</option>
+              <option value="Otra consulta">Otra consulta</option>
             </select>
           </div>
           <div class="flex flex-col">
@@ -74,11 +79,11 @@ const pageTitle = "Contacto";
               name="budget"
               class="bg-transparent/50 border border-border rounded-[4px] px-4 py-3 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm cursor-pointer appearance-none"
             >
-              <option value="low">Menos de USD 200</option>
-              <option value="med">USD 200 - 500</option>
-              <option value="high">USD 500 - 1000</option>
-              <option value="very-high">Más de USD 1000</option>
-              <option value="idk">No lo tengo claro aún</option>
+              <option value="Menos de R$ 1000">Menos de R$ 1000</option>
+              <option value="R$ 1000 - R$ 2500">R$ 1000 - R$ 2500</option>
+              <option value="R$ 2500 - R$ 5000">R$ 2500 - R$ 5000</option>
+              <option value="Más de R$ 5000">Más de R$ 5000</option>
+              <option value="No lo tengo claro aún">No lo tengo claro aún</option>
             </select>
           </div>
         </div>
@@ -86,10 +91,10 @@ const pageTitle = "Contacto";
         <div class="flex flex-col">
           <label for="message" class="text-[11px] uppercase tracking-widest text-text-secondary font-bold mb-2 ml-1">Contame tu proyecto</label>
           <textarea 
-            id="message" 
             name="message" 
+            id="message"
             rows="5" 
-            placeholder="Describí brevemente qué querés hacer, qué plazos tenés, y cualquier detalle relevante que me sirva para entenderte mejor." 
+            placeholder="Contame brevemente tu proyecto, plazos y objetivos..." 
             required
             class="bg-transparent/50 border border-border rounded-[4px] px-4 py-4 text-text-primary focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-body text-sm resize-none"
           ></textarea>
@@ -97,14 +102,6 @@ const pageTitle = "Contacto";
 
         <div class="pt-2">
           <Button text="Enviar mensaje →" type="submit" variant="primary" class="w-full h-14" />
-        </div>
-
-        <!-- Success Message -->
-        <div id="form-success" class="hidden mt-6 p-4 bg-accent/10 border border-accent/20 rounded-btn flex items-center gap-3 animate-fadeIn">
-          <div class="w-8 h-8 bg-accent text-primary rounded-full flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          </div>
-          <p class="text-accent font-bold font-body text-sm">¡Mensaje enviado! Te respondo en menos de 24hs.</p>
         </div>
       </form>
     </div>
@@ -143,7 +140,7 @@ const pageTitle = "Contacto";
           </div>
           <div class="flex flex-col">
             <span class="text-text-muted text-[11px] uppercase tracking-widest font-bold">Modalidad</span>
-            <span class="text-text-primary font-bold font-body">100% remoto · Argentina y región</span>
+            <span class="text-text-primary font-bold font-body">100% remoto · Brasil y región</span>
           </div>
         </div>
       </div>
@@ -180,6 +177,23 @@ const pageTitle = "Contacto";
     </div>
   </section>
 
+  <!-- Success Modal -->
+  <div id="contact-success-modal" class="fixed inset-0 z-[600] hidden items-center justify-center p-4">
+    <div id="success-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300"></div>
+    <div class="relative w-full max-w-md glass-card p-10 flex flex-col items-center text-center scale-95 opacity-0 transition-all duration-300 translate-y-4" id="success-modal-container">
+      <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center text-accent mb-6 animate-pulse">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h3 class="text-2xl md:text-3xl font-display uppercase tracking-widest text-text-primary mb-4">¡Mensaje Enviado!</h3>
+      <p class="text-text-secondary font-body leading-relaxed mb-8">
+        Gracias por contactarme. He recibido tu mensaje correctamente y te responderé en las próximas <span class="text-accent font-bold">24 horas hábiles</span>.
+      </p>
+      <button id="close-success-modal" class="w-full py-4 bg-accent text-primary font-bold uppercase tracking-widest rounded-badge hover:brightness-110 active:scale-95 transition-all duration-300">
+        Entendido
+      </button>
+    </div>
+  </div>
+
   <style>
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -199,20 +213,59 @@ const pageTitle = "Contacto";
   </style>
 
   <script>
-    // Simple Form Submission Handler (simulated for UI)
     const form = document.getElementById('contact-form') as HTMLFormElement;
-    const successMsg = document.getElementById('form-success');
+    const redirectInput = document.getElementById('redirect-url') as HTMLInputElement;
+    const modal = document.getElementById('contact-success-modal');
+    const modalBackdrop = document.getElementById('success-modal-backdrop');
+    const modalContainer = document.getElementById('success-modal-container');
+    const closeBtn = document.getElementById('close-success-modal');
 
-    if (form && successMsg) {
-      form.addEventListener('submit', async (e) => {
-        // Here you would normally handle the Formspree submission via AJAX if you want to keep the success message on the same page
-        // But the default behavior is a redirect. 
-        // We'll simulate a local success shown before redirecting or just UI behavior if they stay.
-        // For actual production use with the success message on-page, we'd use fetch().
-        
-        console.log('Form submitted');
-        // successMsg.classList.remove('hidden'); // Show if handling via fetch
+    // Set dynamic redirect URL on submit
+    if (form && redirectInput) {
+      form.addEventListener('submit', () => {
+        // This ensures they go back to the current domain, wherever it's hosted
+        redirectInput.value = window.location.origin + window.location.pathname + "?success=true";
       });
     }
+
+    function openModal() {
+      if (!modal || !modalContainer) return;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        modalContainer.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+        modalContainer.classList.remove('scale-95', 'translate-y-4');
+      }, 10);
+    }
+
+    function closeModal() {
+      if (!modal || !modalContainer) return;
+      modalContainer.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+      modalContainer.classList.add('scale-95', 'translate-y-4');
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 300);
+      
+      // Clear URL params
+      const url = new URL(window.location.href);
+      url.searchParams.delete('success');
+      window.history.replaceState({}, '', url);
+    }
+
+    // Show modal if success param is present
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        openModal();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
   </script>
 </BaseLayout>

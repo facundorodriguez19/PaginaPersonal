@@ -5,12 +5,12 @@ import logo from '../assets/images/ui/logo.png';
 const { pathname } = Astro.url;
 
 const navLinks = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Proyectos', href: '/proyectos' },
-  { name: 'Servicios', href: '/servicios' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contacto', href: '/contacto' },
-];
+      { name: 'Inicio', href: '/' },
+    { name: 'Proyectos', href: '/proyectos' },
+    { name: 'Servicios', href: '/servicios' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contacto', href: '/contacto' },
+  ];
 
 const isActive = (href) => {
   if (href === '/' && pathname === '/') return true;
@@ -20,10 +20,10 @@ const isActive = (href) => {
 
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 w-full h-[80px] z-[100] transition-all duration-500 flex items-center px-6">
-    <div id="navbar-container" class="max-w-[1200px] w-full mx-auto p-4 flex justify-between items-center transition-all duration-500 border border-transparent rounded-[20px] md:px-6">
+<nav id="navbar" class="fixed top-0 left-0 w-full h-[80px] z-[500] transition-all duration-500 flex items-center px-6">
+    <div id="navbar-container" class="max-w-[1200px] w-full mx-auto p-4 flex justify-between items-center transition-all duration-500 border border-transparent rounded-[20px] md:px-6 relative z-[520]">
       <!-- Logo -->
-      <a href="/" class="flex items-center group transition-transform origin-left">
+      <a href="/" class="flex items-center group transition-transform origin-left relative z-[110]">
         <Image src={logo} alt="FACUNDO" width={120} height={45} format="webp" loading="eager" class="h-[24px] md:h-[45px] w-auto object-contain brightness-110 mix-blend-screen" />
       </a>
 
@@ -51,52 +51,78 @@ const isActive = (href) => {
     <!-- Mobile Button -->
     <button 
       id="menu-toggle" 
-      class="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-[110]"
-      aria-label="Abrir Menú"
+      class="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-[110] transition-transform active:scale-90"
+      aria-label="Toggle Menú"
     >
-      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px]"></span>
-      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px]"></span>
-      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300"></span>
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px] origin-center"></span>
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 mb-[6px] origin-center"></span>
+      <span class="hamburger-line w-6 h-[2px] bg-text-primary transition-all duration-300 origin-center"></span>
     </button>
   </div>
 
   <!-- Mobile Menu Overlay -->
   <div 
     id="mobile-menu" 
-    class="fixed inset-0 bg-[#080808]/98 z-[105] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 ease-in-out md:hidden"
+    class="fixed inset-0 bg-[#080808] z-[510] flex flex-col items-center justify-center translate-x-full transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) md:hidden"
   >
-    <ul class="flex flex-col items-center gap-8">
-      {navLinks.map((link) => (
-        <li>
+    <!-- Background Decoration -->
+    <div class="absolute inset-0 z-0 opacity-30 pointer-events-none">
+      <div class="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-[5%] right-[5%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[120px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:32px_32px]"></div>
+    </div>
+
+    <ul class="relative z-10 flex flex-col items-center gap-4 w-full px-12 pt-20">
+      {navLinks.map((link, index) => (
+        <li class="w-full text-center opacity-0 translate-y-4 transition-all duration-500 delay-[calc(100ms*var(--i))]" style={`--i: ${index}`}>
           <a
             href={link.href}
-            class={`font-display text-[48px] uppercase tracking-wider transition-colors duration-300 mobile-link
-              ${isActive(link.href) ? 'text-accent' : 'text-text-primary hover:text-accent'}`}
+            class={`mobile-link block py-3 font-display text-[40px] leading-tight uppercase tracking-[0.05em] transition-all duration-300
+              ${isActive(link.href) ? 'text-accent drop-shadow-[0_0_15px_rgba(0,212,170,0.3)]' : 'text-text-primary hover:text-accent'}`}
           >
             {link.name}
           </a>
+          <div class={`h-[2px] w-8 mx-auto bg-white/10 transition-all duration-500 ${isActive(link.href) ? 'w-20 bg-accent' : ''}`}></div>
         </li>
       ))}
     </ul>
+
+    <!-- Mobile Footer Info -->
+    <div class="absolute bottom-10 left-0 w-full text-center opacity-0 translate-y-4 transition-all duration-700 delay-500 mobile-footer px-6">
+      <div class="h-[1px] w-full bg-border/50 mb-8"></div>
+      <p class="text-text-secondary text-[11px] font-body tracking-[0.2em] uppercase mb-2">Disponible para proyectos freelance</p>
+      <p class="text-text-muted text-[10px] font-body uppercase">Basado en Brasil • Disponible Globalmente</p>
+    </div>
   </div>
 </nav>
 
 <style>
   .hamburger-active .hamburger-line:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
+    background-color: var(--accent-color);
   }
   .hamburger-active .hamburger-line:nth-child(2) {
     opacity: 0;
+    transform: translateX(10px);
   }
   .hamburger-active .hamburger-line:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--accent-color);
   }
 
-  /* Scrolled state for navbar */
+  /* When menu is open, animate children */
+  #mobile-menu:not(.translate-x-full) li {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  #mobile-menu:not(.translate-x-full) .mobile-footer {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
   .nav-scrolled {
-    background-color: rgba(8, 8, 8, 0.95);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    height: 80px !important;
   }
 
   /* Ensure active link underline stays visible */
@@ -115,15 +141,11 @@ const isActive = (href) => {
   if (navbar && navContainer) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
-        navbar.style.height = '100px';
-        navbar.style.top = '12px';
-        
+        navbar.classList.add('nav-scrolled');
         navContainer.classList.add('bg-[#080808]/80', 'backdrop-blur-md', 'border-white/10', 'shadow-[0_8px_32px_rgba(0,0,0,0.4)]');
         navContainer.classList.remove('border-transparent');
       } else {
-        navbar.style.height = '80px';
-        navbar.style.top = '0';
-        
+        navbar.classList.remove('nav-scrolled');
         navContainer.classList.remove('bg-[#080808]/80', 'backdrop-blur-md', 'border-white/10', 'shadow-[0_8px_32px_rgba(0,0,0,0.4)]');
         navContainer.classList.add('border-transparent');
       }
@@ -132,9 +154,12 @@ const isActive = (href) => {
 
   // Toggle Mobile Menu
   menuToggle?.addEventListener('click', () => {
-    menuToggle.classList.toggle('hamburger-active');
+    const isActive = menuToggle.classList.toggle('hamburger-active');
     mobileMenu?.classList.toggle('translate-x-full');
     document.body.classList.toggle('overflow-hidden');
+    
+    // Explicitly handle menu open state for animations if needed
+    // The CSS rules using :not(.translate-x-full) should handle it
   });
 
   // Close menu on link click

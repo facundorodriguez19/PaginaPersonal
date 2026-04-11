@@ -70,15 +70,14 @@ const servicesSet = [
         </div>
 
         <!-- Heading -->
-        <h1 class="flex flex-col font-display leading-[1.0] animate-item">
-          <span class="text-[52px] md:text-[88px] text-text-primary tracking-tight">Desarrollador</span>
-          <span class="text-[52px] md:text-[88px] text-text-primary tracking-tight">Web</span>
-          <span class="text-[52px] md:text-[88px] text-accent tracking-normal drop-shadow-[0_0_20px_rgba(0,212,170,0.15)]">Freelance.</span>
+        <h1 class="flex flex-col font-display leading-[0.9] animate-item">
+          <span class="text-[42px] md:text-[72px] text-text-primary tracking-tight">Transformá tu Presencia</span>
+          <span class="text-[52px] md:text-[96px] text-accent tracking-normal drop-shadow-[0_0_20px_rgba(0,212,170,0.15)]">En Resultados Reales.</span>
         </h1>
 
         <!-- Subheading -->
-        <p class="text-text-secondary text-[18px] md:text-[20px] max-w-[480px] leading-[1.8] font-body animate-item">
-          Desarrollo sitios y aplicaciones web en <span class="text-text-primary font-medium">PHP, JavaScript y WordPress</span>. Transformo ideas en productos digitales reales que generan resultados.
+        <p class="text-text-secondary text-[18px] md:text-[22px] max-w-[520px] leading-[1.6] font-body animate-item">
+          Desarrollo sitios web que no solo se ven increíbles, sino que <span class="text-text-primary font-bold">venden y posicionan</span>. Soluciones a medida en PHP y JavaScript para emprendedores ambiciosos.
         </p>
 
         <!-- Tech Stack Badges -->
@@ -93,8 +92,8 @@ const servicesSet = [
 
         <!-- CTA Buttons -->
         <div class="flex flex-wrap gap-4 pt-4 animate-item">
-          <Button text="Ver mis proyectos →" href="/proyectos" variant="primary" />
-          <Button text="Contactame" href="/contacto" variant="secondary" />
+          <Button text="Clique aqui para existir" href="/contacto" variant="primary" class="cta-button" />
+          <Button text="Ver portafolio" href="/proyectos" variant="secondary" />
         </div>
       </div>
 
@@ -152,12 +151,12 @@ const servicesSet = [
   <section class="bg-transparent border-y border-border py-12 px-6">
     <div class="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 divide-x-0 lg:divide-x lg:divide-border/50">
       <div class="flex flex-col items-center text-center px-4 reveal" data-delay="0">
-        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="8">0</span>
+        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="10">0</span>
 
         <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Proyectos Completados</span>
       </div>
       <div class="flex flex-col items-center text-center px-4 reveal" data-delay="100">
-        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="4">0</span>
+        <span class="font-display text-[40px] md:text-[56px] text-accent leading-none stat-number" data-target="6">0</span>
         <span class="font-body text-[11px] md:text-[14px] text-text-secondary uppercase tracking-[0.1em] mt-2">Clientes Reales</span>
       </div>
       <div class="flex flex-col items-center text-center px-4 reveal" data-delay="200">
@@ -173,6 +172,11 @@ const servicesSet = [
       </div>
     </div>
   </section>
+
+  <!-- CTA INTERMEDIO -->
+  <div class="flex justify-center py-12 reveal">
+    <Button text="Clique aqui para existir" href="/contacto" variant="primary" class="cta-button" />
+  </div>
 
 
   <!-- SECTION 3: PROYECTOS DESTACADOS -->
@@ -286,6 +290,11 @@ const servicesSet = [
     .animate-item:nth-child(3) { animation-delay: 0.3s; }
     .animate-item:nth-child(4) { animation-delay: 0.4s; }
     .animate-item:nth-child(5) { animation-delay: 0.5s; }
+
+    .cta-button {
+      min-height: 44px;
+      padding: 12px 20px;
+    }
 
     .animate-item-delayed {
       opacity: 0;

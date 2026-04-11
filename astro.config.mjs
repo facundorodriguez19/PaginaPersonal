@@ -9,4 +9,7 @@ export default defineConfig({
     inlineStylesheets: "auto",
   },
   integrations: [tailwind()],
+  devToolbar: {
+    enabled: false
+  }
 });
